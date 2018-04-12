@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/alumno"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Alumnos"/>
+        <item
+            android:id="@+id/materia"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Materias"/>
+        <item
+            android:id="@+id/registro"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Registros"/>
+        <item
+            android:id="@+id/boleta"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Boletas"/>
+    </group>
+
+</menu>

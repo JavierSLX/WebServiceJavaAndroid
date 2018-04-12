@@ -1,0 +1,94 @@
+------------------- LECCIÓN 1 -----------------------
+
+### Preparación del entorno de trabajo
+
+>>> Bases de datos externas
+>> Este tipo de BD son alojadas en servidores. Entre ellas tenemos: MySQL, PostgreSQL, SQL Server, Oracle DataBase, MongoDB.
+>> Para poder acceder a ellas se deben de hacer uso de servicio web o también llamados Web Services, estos realizan la comunicación entre la BD y la aplicación.
+>> Para realizar una BD de Workbench a partir de un BD se le da click en Database y después en Forward Engineer to Database
+>> Para la creación de un usuario es importante darle privilegios en Schema Privileges.
+
+------------------- LECCIÓN 2 -----------------------
+
+### Elaboración del acceso a la BD
+
+>>> Creando conexion a la base de datos
+>> Se puede hacer una Web Service en Java usando NetBeants se crea un proyecto nuevo Maven y Project from Archetype.
+>> En la segunda ventana se filtra buscando org.apache.maven y se elige la opcion maven-archetype-webapp ya que permite crear una plantilla de una aplicación Web.
+>> Se le da un titulo del proyecto y una ubicación en la siguiente ventana. Se crea el proyecto finalmente.
+>> Se hace una modificación en el archivo pom.xml. Se modifica el nombre (se borra la parte complementaria
+>> Debajo de la etiqueta <finalName> se copia el siguiente plugin para que funcione (El source y target en dado que salga un error tiene que ser corregido):
+<plugins>
+     <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+        </configuration>
+    </plugin>
+</plugins>
+>> Se agrega tambien la siguiente dependencia (Se pone la versión de tu conector) entre la pestaña <dependencies>:
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.40</version>
+</dependency>
+>> En la pestaña Archivos, sobre la carpeta main se crea una carpeta llamada java, esto habilitará en la pestaña Proyectos el "Paquete de fuentes" donde se agregarán los paquetes y clases.
+>> Se agrega primeramente un paquete llamado com.nextu.android.dao (dao de Data Access Object).
+>> Se crea aqui una clase llamada Conexion
+>> Para configurar llaves y autocompletado en Netbeans:
+https://www.youtube.com/watch?v=O6LdI_HD9ic
+https://es.stackoverflow.com/questions/91524/cambiar-la-forma-de-ordenar-automaticamente-el-codigo-en-netbeans-8-2
+>> Para probar las clases se puede usar el Paquete de Pruebas y de ahí crear clases de prueba.
+
+>>> Método Insertar
+>> Se crea una interface para obligar a crear metodos para cada DAO de cada clase.
+
+------------------- LECCIÓN 3 -----------------------
+
+### Creación del servicio
+
+>>> Configurando el proyecto para el desarrollo de webservices
+>> Se agregan las siguientes dependencias en el archivo pom.xml
+    <dependency>
+        <groupId>org.glassfish.jersey.bundles</groupId>
+        <artifactId>jaxrs-ri</artifactId>
+        <version>2.23.1</version>
+    </dependency>
+    <dependency>
+        <groupId>org.glassfish.jersey.media</groupId>
+        <artifactId>jersey-media-moxy</artifactId>
+        <version>2.23.1</version>
+    </dependency>
+>> En el archivo Web Pages/WEB-INF/ se encontrará un archivo web.xml hay que borrarlo y sobre la carpeta WEB-INF se le da click derecho, nuevo y Standard Deployment Descriptor (web.xml)
+>> Dentro del documento se borra una parte y se agrega lo siguiente (se crea un nuevo paquete para que pueda ser referenciado):
+    <servlet>
+        <servlet-name>WebServiceNextU</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>com.nextu.android.resource</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WebServiceNextU</servlet-name>
+        <url-pattern>/webapi/*</url-pattern>
+    </servlet-mapping>
+>> Finalmente se le da click derecho sobre el nombre del proyecto (Carpeta principal) y se elige la opcion Build with Dependencies o Limpiar y construir
+>> Se configura en que servidor se correrá desde el nombre del proyecto, click derecho, Propiedades y Opcion Run. Se elige Tomcat, Java EE 7 Web y como path una ruta separado con un slash (/)
+>> Hay que descargar Tomcat (o Xampp) y configurarlo desde NetBeans como servidor nuevo.
+>> Para que un objeto pueda ser listado necesita tener un constructor vacío.
+>> Hay un software llamado Postman que permite realizar peticiones JSON.
+
+>>> Método Post
+>> Se recomienda descargar el programa Postman desde la tienda de Chrome para realizar peticiones de prueba al servicio. Para realizar peticiones POST se mandan los datos en el cuerpo del mensaje. Con la opción raw se puede mandar la petición en forma de application/json:
+{
+"nombre":"Carmen",
+"contrasena":"carmenlo"
+}
+
+>>> Metodo PUT
+>> Este método recibe en sus parametros el valor que cambiará

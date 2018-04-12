@@ -1,0 +1,13 @@
+com\javiersl\android\resource\AlumnoWeb.class
+com\javiersl\android\dao\IDAO.class
+com\javiersl\android\resource\RegistroWeb.class
+com\javiersl\android\dao\DAOMateria.class
+com\javiersl\android\resource\MateriaWeb.class
+com\javiersl\android\entidades\Materia.class
+com\javiersl\android\entidades\Registro.class
+com\javiersl\android\entidades\Alumno.class
+com\javiersl\android\dao\DAOAlumno.class
+com\javiersl\android\entidades\Boleta.class
+com\javiersl\android\dao\DAORegistro.class
+com\javiersl\android\dao\Conexion.class
+com\javiersl\android\dao\DAOBoleta.class
